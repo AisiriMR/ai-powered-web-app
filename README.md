@@ -1,7 +1,7 @@
 # ai-powered-web-app
 AI-Powered Secure Web Application on AWS 
 
-# CS524 Final Project — AI-Powered Secure Web Application
+# AI-Powered Secure Web Application
 
 **Stevens Institute of Technology | Spring 2026**
 
