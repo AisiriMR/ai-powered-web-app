@@ -5,6 +5,9 @@ AI-Powered Secure Web Application on AWS
 
 **Stevens Institute of Technology | Spring 2026**
 
+## 🎥 Video Demo
+[Click here to watch the demo](https://drive.google.com/file/d/1ATElk1c4sNbiAqWcSf-l3wt9avl4MI8P/view?usp=sharing)
+
 ## Live Demo
 https://d169r8mwjk1yr9.cloudfront.net
 
