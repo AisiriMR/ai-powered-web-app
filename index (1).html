@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TextLens — AI Text Analyzer</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+  <div class="bg-grid"></div>
+
+  <header>
+    <div class="logo">
+      <span class="logo-mark">◈</span>
+      <span class="logo-text">TextLens</span>
+    </div>
+    <div class="header-tag">CS524 · AI Analysis Engine</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="hero-eyebrow">Powered by AWS Lambda</p>
+      <h1 class="hero-title">Understand<br/><em>any text</em><br/>instantly.</h1>
+      <p class="hero-sub">Paste or type text below to reveal sentiment, entities, key phrases, and readability metrics — all processed serverlessly in the cloud.</p>
+    </section>
+
+    <section class="analyzer-card">
+      <div class="input-area">
+        <label for="textInput" class="input-label">Your Text</label>
+        <textarea id="textInput"
+          placeholder="Type or paste text here..."
+          rows="7"
+        ></textarea>
+        <div class="input-footer">
+          <span id="charCount" class="char-count">0 characters</span>
+          <button id="analyzeBtn" onclick="analyzeText()">
+            <span class="btn-icon">◈</span>
+            Analyze with AI
+          </button>
+        </div>
+      </div>
+
+      <div id="loadingState" class="loading-state hidden">
+        <div class="spinner"></div>
+        <p>Processing with Lambda…</p>
+      </div>
+
+      <div id="errorState" class="error-state hidden">
+        <span class="error-icon">⚠</span>
+        <p id="errorMsg">Something went wrong. Please try again.</p>
+      </div>
+
+      <div id="results" class="results hidden">
+        <div class="results-header">
+          <span class="results-label">Analysis Results</span>
+          <button class="reset-btn" onclick="resetForm()">↺ New Analysis</button>
+        </div>
+
+        <div class="result-grid">
+
+          <!-- Sentiment -->
+          <div class="result-card sentiment-card">
+            <div class="card-header">
+              <span class="card-icon">◉</span>
+              <span class="card-title">Sentiment</span>
+            </div>
+            <div id="sentimentValue" class="sentiment-badge">—</div>
+            <div id="sentimentConfidence" class="sentiment-confidence">—</div>
+            <div class="sentiment-bars">
+              <div class="bar-row">
+                <span>Positive</span>
+                <div class="bar-track"><div id="posBar" class="bar-fill pos"></div></div>
+                <span id="posScore" class="bar-pct">0%</span>
+              </div>
+              <div class="bar-row">
+                <span>Neutral</span>
+                <div class="bar-track"><div id="neuBar" class="bar-fill neu"></div></div>
+                <span id="neuScore" class="bar-pct">0%</span>
+              </div>
+              <div class="bar-row">
+                <span>Negative</span>
+                <div class="bar-track"><div id="negBar" class="bar-fill neg"></div></div>
+                <span id="negScore" class="bar-pct">0%</span>
+              </div>
+              <div class="bar-row">
+                <span>Mixed</span>
+                <div class="bar-track"><div id="mixBar" class="bar-fill mix"></div></div>
+                <span id="mixScore" class="bar-pct">0%</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Readability -->
+          <div class="result-card readability-card">
+            <div class="card-header">
+              <span class="card-icon">◎</span>
+              <span class="card-title">Readability</span>
+            </div>
+            <div class="readability-score-wrap">
+              <svg class="donut" viewBox="0 0 80 80">
+                <circle class="donut-bg" cx="40" cy="40" r="32"/>
+                <circle id="donutCircle" class="donut-ring" cx="40" cy="40" r="32"
+                  stroke-dasharray="0 201" stroke-dashoffset="50"/>
+              </svg>
+              <div class="donut-label">
+                <span id="readScore">—</span>
+                <small>/ 100</small>
+              </div>
+            </div>
+            <div id="readLevel" class="read-level">—</div>
+            <div class="read-stats">
+              <div class="stat"><span id="wordCount">—</span><small>words</small></div>
+              <div class="stat"><span id="sentCount">—</span><small>sentences</small></div>
+              <div class="stat"><span id="avgWps">—</span><small>avg/sent</small></div>
+            </div>
+          </div>
+
+          <!-- Entities -->
+          <div class="result-card entities-card">
+            <div class="card-header">
+              <span class="card-icon">◇</span>
+              <span class="card-title">Named Entities</span>
+            </div>
+            <div id="entitiesList" class="tags-wrap">
+              <span class="empty-msg">No entities detected</span>
+            </div>
+          </div>
+
+          <!-- Key Phrases -->
+          <div class="result-card phrases-card">
+            <div class="card-header">
+              <span class="card-icon">◆</span>
+              <span class="card-title">Key Phrases</span>
+            </div>
+            <div id="phrasesList" class="tags-wrap">
+              <span class="empty-msg">No key phrases detected</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>CS524 · Stevens Institute of Technology · Spring 2026</span>
+    <span class="footer-sep">·</span>
+    <span>Hosted on AWS S3 + CloudFront</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
